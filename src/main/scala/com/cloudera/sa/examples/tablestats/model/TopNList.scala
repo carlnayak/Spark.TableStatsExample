@@ -11,13 +11,14 @@ class TopNList(val maxSize:Int)  extends Serializable {
   var lowestValue = Long.MaxValue
 
   def add(newValue:Any, newCount:Long): Unit = {
-    if (topNCountsForColumnArray.length < maxSize -1) {
+    if (topNCountsForColumnArray.length < maxSize - 1) {
       topNCountsForColumnArray += ((newValue, newCount))
-    } else if (topNCountsForColumnArray.length == maxSize) {
+    } else if (topNCountsForColumnArray.length == maxSize - 1) {
+      topNCountsForColumnArray += ((newValue, newCount))
       updateLowestValue
     } else {
       if (newCount > lowestValue) {
-        topNCountsForColumnArray.insert(lowestColumnCountIndex, (newValue, newCount))
+        topNCountsForColumnArray.update(lowestColumnCountIndex, (newValue, newCount))
         updateLowestValue
       }
     }
