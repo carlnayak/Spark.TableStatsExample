@@ -44,7 +44,7 @@ class ColumnStats(var nulls:Long = 0l,
     empties += columnStats.empties
     sumLong += columnStats.sumLong
     maxLong = maxLong.max(columnStats.maxLong)
-    minLong = minLong.max(columnStats.minLong)
+    minLong = minLong.min(columnStats.minLong)
 
     columnStats.topNValues.topNCountsForColumnArray.foreach{ r =>
       topNValues.add(r._1, r._2)
